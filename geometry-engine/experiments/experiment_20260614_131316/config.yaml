@@ -1,0 +1,30 @@
+extraction:
+  target_timesteps:
+  - 0.1
+  - 0.3
+  - 0.5
+  - 0.7
+  - 0.9
+  top_layers: 5
+  top_timesteps: 3
+ggl:
+  schema: geometry_graph_language
+  version: '1.0'
+heads:
+  confidence_threshold: 0.8
+  dropout: 0.1
+  enabled:
+  - part
+  - surface
+  - topology
+  hidden_dim: 1024
+  num_heads: 8
+logging:
+  base_dir: logs
+  experiments_dir: experiments
+  save_intermediate_tensors: true
+primitive:
+  max_iterations: 100
+  optimizer: ransac
+  tolerance: 1e-4
+  top_k_proposals: 3

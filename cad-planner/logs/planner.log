@@ -1,0 +1,77 @@
+2026-06-14 09:14:39,367 - pipeline_runner - INFO - ============================================================
+2026-06-14 09:14:39,367 - pipeline_runner - INFO - Starting CAD Planning Engine Pipeline
+2026-06-14 09:14:39,367 - pipeline_runner - INFO - ============================================================
+2026-06-14 09:14:39,369 - pipeline_runner - INFO - Stage 1: Parsing GGL
+2026-06-14 09:14:39,369 - pipeline_runner - INFO -   Parsed 2 nodes, 1 edges
+2026-06-14 09:14:39,369 - pipeline_runner - INFO - Stage 2: Geometry Validation
+2026-06-14 09:14:39,371 - pipeline_runner - INFO -   Geometry is valid
+2026-06-14 09:14:39,371 - pipeline_runner - INFO - Stage 3: Intent Classification
+2026-06-14 09:14:39,371 - pipeline_runner - INFO -   n1: primary=Extrusion, alternatives=[]
+2026-06-14 09:14:39,373 - pipeline_runner - INFO -   n2: primary=Cut Feature, alternatives=['Extrusion', 'Revolution', 'Sweep']
+2026-06-14 09:14:39,373 - pipeline_runner - INFO - Stage 4: Dependency Graph Generation
+2026-06-14 09:14:39,374 - pipeline_runner - INFO -   Topological order: ['n1', 'n2']
+2026-06-14 09:14:39,374 - pipeline_runner - INFO - Stage 5: Sketch Generation & Constraints
+2026-06-14 09:14:39,374 - pipeline_runner - INFO -   n1: 4 entities, 7 constraints
+2026-06-14 09:14:39,374 - pipeline_runner - INFO -   n2: 1 entities, 0 constraints
+2026-06-14 09:14:39,374 - pipeline_runner - INFO - Stage 6: Manufacturability Analysis
+2026-06-14 09:14:39,374 - pipeline_runner - INFO -   Manufacturability score: 1.0
+2026-06-14 09:14:39,374 - pipeline_runner - INFO - Stage 7: Planner Memory Retrieval
+2026-06-14 09:14:39,374 - pipeline_runner - INFO -   n1: no stored pattern, using rule engine
+2026-06-14 09:14:39,374 - pipeline_runner - INFO -   n2: recalled pattern ['create_sketch', 'extrude_cut']
+2026-06-14 09:14:39,374 - pipeline_runner - INFO - Stage 8: Rule Engine & Ambiguity Resolution
+2026-06-14 09:14:39,374 - pipeline_runner - INFO -   n1: strategies = ['Extrusion']
+2026-06-14 09:14:39,375 - pipeline_runner - INFO -   n2: strategies = ['Cut Feature', 'Extrusion', 'Revolution', 'Sweep']
+2026-06-14 09:14:39,375 - pipeline_runner - INFO -   Generated 5 candidate construction graphs
+2026-06-14 09:14:39,375 - pipeline_runner - INFO - Stage 9: Beam Search Planning
+2026-06-14 09:14:39,375 - pipeline_runner - INFO -   Best plan has 3 operations
+2026-06-14 09:14:39,375 - pipeline_runner - INFO - Stage 10: Feature Tree Optimization
+2026-06-14 09:14:39,375 - pipeline_runner - INFO - Stage 11: CAL Generation
+2026-06-14 09:14:39,375 - pipeline_runner - INFO -   Generated 4 CAL actions
+2026-06-14 09:14:39,375 - pipeline_runner - INFO - Stage 12: CAL Optimization
+2026-06-14 09:14:39,375 - pipeline_runner - INFO -   Optimized to 4 CAL actions
+2026-06-14 09:14:39,375 - pipeline_runner - INFO - Stage 13: Assembling & Validating CAL Document
+2026-06-14 09:14:39,375 - pipeline_runner - INFO -   CAL document is valid
+2026-06-14 09:14:39,377 - pipeline_runner - INFO - ============================================================
+2026-06-14 09:14:39,378 - pipeline_runner - INFO - PIPELINE COMPLETE — CAL exported to: C:\Users\proka\.gemini\antigravity\scratch\cad-planner\output\final.cal.json
+2026-06-14 09:14:39,378 - pipeline_runner - INFO - ============================================================
+2026-06-14 13:13:39,659 - pipeline_runner - INFO - ============================================================
+2026-06-14 13:13:39,659 - pipeline_runner - INFO - Starting CAD Planning Engine Pipeline
+2026-06-14 13:13:39,659 - pipeline_runner - INFO - ============================================================
+2026-06-14 13:13:39,659 - pipeline_runner - INFO - Stage 1: Parsing GGL (with source integrity verification)
+2026-06-14 13:13:39,659 - pipeline_runner - INFO -   Parsed 2 nodes, 1 edges
+2026-06-14 13:13:39,676 - pipeline_runner - INFO - Stage 2: Geometry Validation
+2026-06-14 13:13:39,676 - pipeline_runner - INFO -   Geometry is valid
+2026-06-14 13:13:39,676 - pipeline_runner - INFO - Stage 3: Intent Classification
+2026-06-14 13:13:39,676 - pipeline_runner - INFO -   n1: primary=Extrusion, alternatives=[]
+2026-06-14 13:13:39,676 - pipeline_runner - INFO -   n2: primary=Cut Feature, alternatives=['Extrusion', 'Revolution', 'Sweep']
+2026-06-14 13:13:39,676 - pipeline_runner - INFO - Stage 4: Dependency Graph Generation
+2026-06-14 13:13:39,676 - pipeline_runner - INFO -   Topological order: ['n1', 'n2']
+2026-06-14 13:13:39,676 - pipeline_runner - INFO - Stage 5: Sketch Generation & Constraints
+2026-06-14 13:13:39,676 - pipeline_runner - INFO -   n1: 4 entities, 7 constraints
+2026-06-14 13:13:39,676 - pipeline_runner - INFO -   n2: 1 entities, 0 constraints
+2026-06-14 13:13:39,676 - pipeline_runner - INFO - Stage 6: Manufacturability Analysis
+2026-06-14 13:13:39,676 - pipeline_runner - INFO -   Manufacturability score: 1.0
+2026-06-14 13:13:39,676 - pipeline_runner - INFO - Stage 7: Planner Memory Retrieval
+2026-06-14 13:13:39,676 - pipeline_runner - INFO -   n1: no stored pattern, using rule engine
+2026-06-14 13:13:39,676 - pipeline_runner - INFO -   n2: recalled pattern ['create_sketch', 'extrude_cut']
+2026-06-14 13:13:39,676 - pipeline_runner - INFO - Stage 8: Rule Engine & Ambiguity Resolution
+2026-06-14 13:13:39,676 - pipeline_runner - INFO -   n1: strategies = ['Extrusion']
+2026-06-14 13:13:39,676 - pipeline_runner - INFO -   n2: strategies = ['Cut Feature', 'Extrusion', 'Revolution', 'Sweep']
+2026-06-14 13:13:39,676 - pipeline_runner - INFO -   Generated 5 candidate construction graphs
+2026-06-14 13:13:39,676 - pipeline_runner - INFO - Stage 9: Beam Search Planning
+2026-06-14 13:13:39,676 - pipeline_runner - INFO -   Best plan has 3 operations
+2026-06-14 13:13:39,676 - pipeline_runner - INFO - Stage 10: Feature Tree Optimization
+2026-06-14 13:13:39,676 - pipeline_runner - INFO - Stage 11: CAL Generation (with confidence propagation)
+2026-06-14 13:13:39,676 - pipeline_runner - INFO -   Generated 4 CAL actions
+2026-06-14 13:13:39,676 - pipeline_runner - INFO -     op_sketch_5d75: confidence=0.92, source=n1
+2026-06-14 13:13:39,676 - pipeline_runner - INFO -     op_extrude_e664: confidence=0.92, source=n1
+2026-06-14 13:13:39,676 - pipeline_runner - INFO -     op_sketch_af3d: confidence=0.85, source=n2
+2026-06-14 13:13:39,676 - pipeline_runner - INFO -     circ_e547: confidence=0.85, source=n2
+2026-06-14 13:13:39,676 - pipeline_runner - INFO - Stage 12: CAL Optimization
+2026-06-14 13:13:39,676 - pipeline_runner - INFO -   Optimized to 4 CAL actions
+2026-06-14 13:13:39,676 - pipeline_runner - INFO - Stage 13: Assembling & Validating CAL Document (with PlanningTrace)
+2026-06-14 13:13:39,676 - pipeline_runner - INFO -   CAL document is valid
+2026-06-14 13:13:39,676 - pipeline_runner - INFO -   PlanningTrace attached: 5 candidates, best=4
+2026-06-14 13:13:39,681 - pipeline_runner - INFO - ============================================================
+2026-06-14 13:13:39,681 - pipeline_runner - INFO - PIPELINE COMPLETE — CAL exported to: C:\Users\proka\.gemini\antigravity\scratch\cad-planner\output\final.cal.json
+2026-06-14 13:13:39,681 - pipeline_runner - INFO - ============================================================

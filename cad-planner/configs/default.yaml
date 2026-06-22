@@ -1,0 +1,25 @@
+# Default Configuration for CAD Planning Engine
+
+planner:
+  beam_width: 3
+  max_history_depth: 50
+
+scoring_weights:
+  reconstruction_quality: 1.0
+  operation_count: -0.5
+  manufacturability: 0.8
+  rebuild_stability: 1.2
+  design_intent_preservation: 1.5
+
+rules:
+  default_fillet_radius: 2.0
+  default_chamfer_distance: 1.0
+
+optimizer:
+  merge_collinear_lines: true
+  remove_zero_length_lines: true
+  merge_duplicate_sketches: true
+
+export:
+  format: "cal"
+  indent: 2

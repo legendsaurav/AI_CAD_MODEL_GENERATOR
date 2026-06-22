@@ -1,0 +1,119 @@
+{
+    "version": "1.0",
+    "schema_name": "geometry_graph_language",
+    "metadata": {
+        "generator": "geometry-engine-v1.0",
+        "original_image": null,
+        "timestep_extracted": null,
+        "layers_used": []
+    },
+    "nodes": [
+        {
+            "node_id": "part_1",
+            "type": "Part",
+            "semantic_label": "Main Body",
+            "confidence": 0.92,
+            "parameters": {}
+        },
+        {
+            "node_id": "part_2",
+            "type": "Part",
+            "semantic_label": "Mounting Hole",
+            "confidence": 0.87,
+            "parameters": {}
+        },
+        {
+            "node_id": "part_3",
+            "type": "Part",
+            "semantic_label": "Shaft",
+            "confidence": 0.78,
+            "parameters": {}
+        },
+        {
+            "node_id": "prim_part_1_0",
+            "type": "Cylinder",
+            "semantic_label": "Proposal-0 for Main Body",
+            "confidence": 0.8143536762323635,
+            "parameters": {
+                "radius": 0.19894832745194435,
+                "height": 0.29811224341392517,
+                "axis": [
+                    0,
+                    1,
+                    0
+                ],
+                "center_x": -0.41035919427871703,
+                "center_y": 0.0485633984208107,
+                "center_z": -0.21503494679927826,
+                "axis_x": -0.003298811614513397,
+                "axis_y": 0.030936621129512787,
+                "axis_z": 0.12467052787542343
+            }
+        },
+        {
+            "node_id": "prim_part_2_0",
+            "type": "Cylinder",
+            "semantic_label": "Proposal-0 for Mounting Hole",
+            "confidence": 0.8143536762323635,
+            "parameters": {
+                "radius": 0.08856453225016594,
+                "height": 0.09935323894023895,
+                "axis": [
+                    0,
+                    1,
+                    0
+                ],
+                "center_x": -0.4117779040336609,
+                "center_y": 0.12059792131185532,
+                "center_z": -0.22898508608341217,
+                "axis_x": -0.014212779700756073,
+                "axis_y": 0.021560247987508774,
+                "axis_z": 0.14037185907363892
+            }
+        },
+        {
+            "node_id": "prim_part_3_0",
+            "type": "Cylinder",
+            "semantic_label": "Proposal-0 for Shaft",
+            "confidence": 0.8143536762323635,
+            "parameters": {
+                "radius": 0.23073897287249567,
+                "height": 0.32551753520965576,
+                "axis": [
+                    0,
+                    1,
+                    0
+                ],
+                "center_x": -0.4818287396430969,
+                "center_y": 0.09917505830526352,
+                "center_z": -0.21860341727733612,
+                "axis_x": -0.046310342848300934,
+                "axis_y": -0.005982622504234314,
+                "axis_z": 0.11774655431509018
+            }
+        }
+    ],
+    "edges": [
+        {
+            "source_id": "part_1",
+            "target_id": "prim_part_1_0",
+            "relation": "Instantiates",
+            "confidence": 0.8143536762323635,
+            "parameters": {}
+        },
+        {
+            "source_id": "part_2",
+            "target_id": "prim_part_2_0",
+            "relation": "Instantiates",
+            "confidence": 0.8143536762323635,
+            "parameters": {}
+        },
+        {
+            "source_id": "part_3",
+            "target_id": "prim_part_3_0",
+            "relation": "Instantiates",
+            "confidence": 0.8143536762323635,
+            "parameters": {}
+        }
+    ]
+}

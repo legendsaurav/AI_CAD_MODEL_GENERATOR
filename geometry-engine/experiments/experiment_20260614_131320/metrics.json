@@ -1,0 +1,13 @@
+[
+    {
+        "timestamp": "2026-06-14T13:13:20.028773",
+        "metrics": {
+            "total_nodes": 6,
+            "total_edges": 5,
+            "primitive_nodes": 3,
+            "json_schema_valid": true,
+            "round_trip_pass": true
+        },
+        "step": 4
+    }
+]

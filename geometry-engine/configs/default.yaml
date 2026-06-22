@@ -1,0 +1,49 @@
+# Geometry Engine Global Configuration
+
+# ---------------------------------------------------------
+# Feature Extraction & Probing (Version 1)
+# ---------------------------------------------------------
+extraction:
+  target_timesteps: [0.1, 0.3, 0.5, 0.7, 0.9]
+  top_layers: 5          # Number of layers to select after feature ranking
+  top_timesteps: 3       # Number of timesteps to keep for downstream
+
+# ---------------------------------------------------------
+# Geometry Heads (Version 2)
+# Plugin-based architecture
+# ---------------------------------------------------------
+heads:
+  enabled:
+    - part
+    - surface
+    - topology
+    # Add others (symmetry, skeleton, cross_section) if evidence supports them
+  
+  confidence_threshold: 0.8
+  hidden_dim: 1024
+  num_heads: 8
+  dropout: 0.1
+
+# ---------------------------------------------------------
+# Primitive Recovery & Optimization (Version 3)
+# ---------------------------------------------------------
+primitive:
+  top_k_proposals: 3     # Top-K candidate primitives to propose per part
+  optimizer: ransac      # Options: least_squares, ransac, gauss_newton, lm
+  max_iterations: 100
+  tolerance: 1e-4
+
+# ---------------------------------------------------------
+# Geometry Graph Language (Version 4)
+# ---------------------------------------------------------
+ggl:
+  version: "1.0"
+  schema: "geometry_graph_language"
+
+# ---------------------------------------------------------
+# Logging & Experiment Tracking
+# ---------------------------------------------------------
+logging:
+  base_dir: "logs"
+  experiments_dir: "experiments"
+  save_intermediate_tensors: true

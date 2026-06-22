@@ -1,0 +1,13 @@
+[
+    {
+        "timestamp": "2026-06-14T13:13:19.998404",
+        "metrics": {
+            "parts_processed": 3,
+            "primitives_added": 3,
+            "total_nodes_after": 6,
+            "total_edges_after": 3,
+            "primitive_confidence_mean": 0.814
+        },
+        "step": 3
+    }
+]

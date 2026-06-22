@@ -1,0 +1,132 @@
+# ──────────────────────────────────────────────────────────────────────────
+#  AI CAD OS — CI Pipeline
+# ──────────────────────────────────────────────────────────────────────────
+name: AI CAD OS CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+env:
+  PYTHONPATH: ${{ github.workspace }}/shared-schemas
+
+jobs:
+  # ── Lint ──────────────────────────────────────────────────────────────
+  lint:
+    name: "Lint (Python ${{ matrix.python-version }})"
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.11"]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: lint-pip-${{ runner.os }}-py${{ matrix.python-version }}-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            lint-pip-${{ runner.os }}-py${{ matrix.python-version }}-
+
+      - name: Install lint tooling
+        run: pip install ruff mypy pydantic types-PyYAML numpy
+
+      - name: Ruff check — geometry-engine
+        run: ruff check geometry-engine/
+
+      - name: Ruff check — cad-planner
+        run: ruff check cad-planner/
+
+      - name: Ruff check — desktop-agent
+        run: ruff check desktop-agent/
+
+      - name: Ruff check — shared-schemas
+        run: ruff check shared-schemas/
+
+      - name: Ruff check — MODEL_GENERATOR_V2
+        run: ruff check MODEL_GENERATOR_V2/
+
+      - name: Mypy — geometry-engine
+        run: mypy --ignore-missing-imports geometry-engine/
+
+      - name: Mypy — cad-planner
+        run: mypy --ignore-missing-imports cad-planner/
+
+      - name: Mypy — shared-schemas
+        run: mypy --ignore-missing-imports shared-schemas/
+
+      - name: Mypy — MODEL_GENERATOR_V2
+        run: mypy --ignore-missing-imports MODEL_GENERATOR_V2/
+
+  # ── Test ─────────────────────────────────────────────────────────────
+  test:
+    name: "Test (Python ${{ matrix.python-version }})"
+    runs-on: ubuntu-latest
+    needs: [lint]
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.11"]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: test-pip-${{ runner.os }}-py${{ matrix.python-version }}-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            test-pip-${{ runner.os }}-py${{ matrix.python-version }}-
+
+      - name: Install shared-schemas
+        run: pip install -e shared-schemas/
+
+      - name: Install & test geometry-engine
+        run: |
+          pip install --no-cache-dir \
+            --extra-index-url https://download.pytorch.org/whl/cpu \
+            -r geometry-engine/requirements.txt
+          pip install pytest pytest-cov
+          python -m pytest geometry-engine/tests/ -v --tb=short
+
+      - name: Install & test cad-planner
+        run: |
+          pip install --no-cache-dir -r cad-planner/requirements.txt
+          pip install pytest
+          python -m pytest cad-planner/tests/ -v --tb=short
+
+      - name: Install & test MODEL_GENERATOR_V2
+        run: |
+          pip install --no-cache-dir \
+            --extra-index-url https://download.pytorch.org/whl/cpu \
+            -r MODEL_GENERATOR_V2/requirements.txt
+          pip install pytest
+          python -m pytest MODEL_GENERATOR_V2/tests/ -v --tb=short
+
+  # ── Gate ─────────────────────────────────────────────────────────────
+  ci-gate:
+    name: "CI Gate"
+    runs-on: ubuntu-latest
+    if: always()
+    needs: [lint, test]
+    steps:
+      - name: Evaluate results
+        run: |
+          if [[ "${{ needs.lint.result }}" != "success" ]] || \
+             [[ "${{ needs.test.result }}" != "success" ]]; then
+            echo "::error::CI gate failed — lint=${{ needs.lint.result }}, test=${{ needs.test.result }}"
+            exit 1
+          fi
+          echo "All checks passed ✓"

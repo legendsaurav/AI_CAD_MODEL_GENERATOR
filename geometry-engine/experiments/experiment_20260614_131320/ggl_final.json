@@ -1,0 +1,116 @@
+{
+    "version": "1.0",
+    "schema_name": "geometry_graph_language",
+    "metadata": {
+        "generator": "geometry-engine-v1.0",
+        "original_image": null,
+        "timestep_extracted": null,
+        "layers_used": []
+    },
+    "nodes": [
+        {
+            "node_id": "part_body",
+            "type": "Part",
+            "semantic_label": "Main Body",
+            "confidence": 0.92,
+            "parameters": {}
+        },
+        {
+            "node_id": "part_shaft",
+            "type": "Part",
+            "semantic_label": "Shaft",
+            "confidence": 0.85,
+            "parameters": {}
+        },
+        {
+            "node_id": "part_hole",
+            "type": "Part",
+            "semantic_label": "Mounting Hole",
+            "confidence": 0.79,
+            "parameters": {}
+        },
+        {
+            "node_id": "prim_body_0",
+            "type": "Box",
+            "semantic_label": "Body Box",
+            "confidence": 0.91,
+            "parameters": {
+                "width": 80.0,
+                "height": 40.0,
+                "depth": 20.0,
+                "center_x": 0.0,
+                "center_y": 0.0,
+                "center_z": 0.0
+            }
+        },
+        {
+            "node_id": "prim_shaft_0",
+            "type": "Cylinder",
+            "semantic_label": "Shaft Cylinder",
+            "confidence": 0.88,
+            "parameters": {
+                "radius": 5.0,
+                "height": 60.0,
+                "center_x": 0.0,
+                "center_y": 0.0,
+                "center_z": 20.0,
+                "axis_x": 0.0,
+                "axis_y": 0.0,
+                "axis_z": 1.0
+            }
+        },
+        {
+            "node_id": "prim_hole_0",
+            "type": "Cylinder",
+            "semantic_label": "Hole Cylinder",
+            "confidence": 0.8,
+            "parameters": {
+                "radius": 3.0,
+                "height": 20.0,
+                "center_x": 30.0,
+                "center_y": 0.0,
+                "center_z": 0.0,
+                "axis_x": 0.0,
+                "axis_y": 0.0,
+                "axis_z": 1.0
+            }
+        }
+    ],
+    "edges": [
+        {
+            "source_id": "part_body",
+            "target_id": "prim_body_0",
+            "relation": "Instantiates",
+            "confidence": 0.91,
+            "parameters": {}
+        },
+        {
+            "source_id": "part_shaft",
+            "target_id": "prim_shaft_0",
+            "relation": "Instantiates",
+            "confidence": 0.88,
+            "parameters": {}
+        },
+        {
+            "source_id": "part_hole",
+            "target_id": "prim_hole_0",
+            "relation": "Instantiates",
+            "confidence": 0.8,
+            "parameters": {}
+        },
+        {
+            "source_id": "part_body",
+            "target_id": "part_shaft",
+            "relation": "Adjacent",
+            "confidence": 0.75,
+            "parameters": {}
+        },
+        {
+            "source_id": "part_body",
+            "target_id": "part_hole",
+            "relation": "Contains",
+            "confidence": 0.82,
+            "parameters": {}
+        }
+    ]
+}

@@ -1,0 +1,18 @@
+{
+    "version": "1.0",
+    "schema_name": "geometry_graph_language",
+    "metadata": {
+        "generator": "geometry-engine-v2.0",
+        "original_image": "mock_input.png",
+        "timestep_extracted": null,
+        "layers_used": [
+            0,
+            1,
+            2,
+            3,
+            4
+        ]
+    },
+    "nodes": [],
+    "edges": []
+}
