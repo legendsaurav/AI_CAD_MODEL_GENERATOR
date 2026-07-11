@@ -1,14 +1,8 @@
-# ──────────────────────────────────────────────────────────────────────────
-#  geometry-engine  —  Production Dockerfile  (multi-stage)
-# ──────────────────────────────────────────────────────────────────────────
-#  Build:  docker build -t geometry-engine .
-#  Run:    docker run -p 8000:8000 geometry-engine
-#
-#  For GPU support, swap the base image to a CUDA-enabled variant and
-#  replace the CPU-only torch index URL accordingly.
-# ──────────────────────────────────────────────────────────────────────────
-
-# ── Stage 1: Builder ────────────────────────────────────────────────────
+# ============================================================
+# Geometry Engine — Production Dockerfile
+# ============================================================
+# Stage 1: Builder
+# ============================================================
 FROM python:3.11-slim AS builder
 
 RUN apt-get update && \
@@ -24,7 +18,9 @@ RUN pip install --no-cache-dir \
     --extra-index-url https://download.pytorch.org/whl/cpu \
     -r requirements.txt
 
-# ── Stage 2: Runtime ───────────────────────────────────────────────────
+# ============================================================
+# Stage 2: Runtime
+# ============================================================
 FROM python:3.11-slim AS runtime
 
 LABEL maintainer="ai-cad-os" \

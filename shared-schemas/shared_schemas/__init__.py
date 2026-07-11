@@ -13,6 +13,7 @@ Data Flow:
                                                                               ↓
                                                               geometry-engine (loop)
 """
+# ── Core schemas (original) ────────────────────────────────────────────────
 from shared_schemas.ggl_schema import (
     GGLNode, GGLEdge, GGLMetadata, GeometryGraphLanguage
 )
@@ -23,3 +24,26 @@ from shared_schemas.cal_schema import (
 )
 from shared_schemas.execution_report import ExecutionReport, ActionResult
 from shared_schemas.refinement_request import RefinementRequest, GeometryDifference
+
+# ── Versioning infrastructure ──────────────────────────────────────────────
+from shared_schemas.versioning import SchemaVersion, VersionedSchema
+
+# ── Phase 1 schemas ────────────────────────────────────────────────────────
+from shared_schemas.reason_graph import (
+    RejectedAlternative, ReasonNode, ReasonEdge, ReasonGraph
+)
+from shared_schemas.planning_trace import (
+    ScoringBreakdown, BeamCandidate, AmbiguityResolution,
+    RetrievedMemory, RejectedPlan, PlanningTrace
+)
+from shared_schemas.events import (
+    EventType, PipelineStage, EventPayload, StageResult, PipelineEvent
+)
+from shared_schemas.verification_report import (
+    VerificationMetric, PrimitiveVerification, VerificationReport
+)
+
+# ── Logging ────────────────────────────────────────────────────────────────
+from shared_schemas.logging_config import (
+    setup_structured_logging, get_correlation_id, set_correlation_id
+)

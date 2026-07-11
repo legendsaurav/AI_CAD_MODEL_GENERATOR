@@ -50,8 +50,11 @@ class DesktopAgentPipeline:
         # Select executor based on target system
         if target_system == "FreeCAD":
             self.executor: BaseExecutor = FreeCADExecutor()
+        elif target_system == "SolidWorks":
+            from solidworks_executor import SolidWorksExecutor
+            self.executor = SolidWorksExecutor()
         else:
-            raise ValueError(f"Unsupported target system: {target_system}. Supported: FreeCAD")
+            raise ValueError(f"Unsupported target system: {target_system}. Supported: FreeCAD, SolidWorks")
 
     def run(self, cal_path: str) -> dict:
         """
@@ -109,6 +112,7 @@ class DesktopAgentPipeline:
             executor=self.executor,
             expected_actions=summary["total"],
             completed_actions=summary["completed"],
+            action_results=action_results,
         )
 
         # Step 6: Generate report

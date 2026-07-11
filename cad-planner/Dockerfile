@@ -1,28 +1,25 @@
-# ──────────────────────────────────────────────────────────────────────────
-#  cad-planner  —  Production Dockerfile  (multi-stage)
-# ──────────────────────────────────────────────────────────────────────────
-#  Build:  docker build -t cad-planner .
-#  Run:    docker run -p 8001:8001 cad-planner
-# ──────────────────────────────────────────────────────────────────────────
-
-# ── Stage 1: Builder ────────────────────────────────────────────────────
+# ============================================================
+# CAD Planner — Production Dockerfile
+# ============================================================
+# Stage 1: Builder
+# ============================================================
 FROM python:3.11-slim AS builder
-
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends build-essential && \
-    rm -rf /var/lib/apt/lists/*
 
 WORKDIR /build
 
 COPY requirements.txt .
-
 RUN pip install --no-cache-dir -r requirements.txt
 
-# ── Stage 2: Runtime ───────────────────────────────────────────────────
+COPY . .
+RUN pip install --no-cache-dir -e .
+
+# ============================================================
+# Stage 2: Runtime
+# ============================================================
 FROM python:3.11-slim AS runtime
 
 LABEL maintainer="ai-cad-os" \
-      description="CAD Planner — GGL-to-CAL beam-search planning engine"
+      description="CAD Planner — GGL to CAL conversion with beam search"
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends curl && \
@@ -34,12 +31,10 @@ RUN groupadd --gid 1000 appuser && \
 
 WORKDIR /app
 
-# Copy installed Python packages from builder
 COPY --from=builder /usr/local/lib/python3.11/site-packages \
                     /usr/local/lib/python3.11/site-packages
 COPY --from=builder /usr/local/bin /usr/local/bin
 
-# Copy application code
 COPY --chown=appuser:appuser . .
 
 USER appuser
