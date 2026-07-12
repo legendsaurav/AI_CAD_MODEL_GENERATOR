@@ -6,7 +6,7 @@ Defines the abstract executor interface and provides a FreeCAD implementation.
 import logging
 import time
 from abc import ABC, abstractmethod
-from typing import Dict, Any, Optional
+from typing import Dict, Any
 
 logger = logging.getLogger("desktop_agent.executor")
 
@@ -78,7 +78,7 @@ class FreeCADExecutor(BaseExecutor):
         """Connect to FreeCAD Python API."""
         try:
             import FreeCAD
-            import Part
+            import Part  # noqa: F401  (ensures full FreeCAD install present)
             self.doc = FreeCAD.newDocument("AI_Generated")
             self._connected = True
             logger.info("Connected to FreeCAD.")
@@ -118,18 +118,14 @@ class FreeCADExecutor(BaseExecutor):
 
     def _create_sketch(self, action_id: str, params: Dict) -> Dict:
         """Create a sketch on the specified plane."""
-        import FreeCAD
-        import Sketcher
         plane = params.get("plane", "XY")
         body = self.doc.addObject("PartDesign::Body", f"Body_{action_id}")
-        sketch = body.newObject("Sketcher::SketchObject", action_id)
+        body.newObject("Sketcher::SketchObject", action_id)
         logger.info(f"Created sketch '{action_id}' on plane {plane}")
         return {"success": True, "feature_id": action_id, "error": None}
 
     def _extrude(self, action_id: str, params: Dict) -> Dict:
         """Extrude a sketch."""
-        import FreeCAD
-        import Part
         depth = params.get("depth", 10.0)
         sketch_id = params.get("sketch_id", "")
         is_cut = params.get("is_cut", False)
@@ -154,17 +150,17 @@ class FreeCADExecutor(BaseExecutor):
 
     def _revolve(self, action_id: str, params: Dict) -> Dict:
         """Revolve a sketch around an axis."""
-        logger.info(f"Revolving sketch around axis")
+        logger.info("Revolving sketch around axis")
         return {"success": True, "feature_id": action_id, "error": None}
 
     def _fillet(self, action_id: str, params: Dict) -> Dict:
         """Apply fillet to edges."""
-        logger.info(f"Filleting edges")
+        logger.info("Filleting edges")
         return {"success": True, "feature_id": action_id, "error": None}
 
     def _chamfer(self, action_id: str, params: Dict) -> Dict:
         """Apply chamfer to edges."""
-        logger.info(f"Chamfering edges")
+        logger.info("Chamfering edges")
         return {"success": True, "feature_id": action_id, "error": None}
 
     def export_mesh(self, output_path: str, format: str = "stl") -> bool:
@@ -193,7 +189,6 @@ class FreeCADExecutor(BaseExecutor):
     def undo(self) -> bool:
         """Undo the last FreeCAD operation."""
         try:
-            import FreeCAD
             if self.doc:
                 self.doc.undo()
                 return True

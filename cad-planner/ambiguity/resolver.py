@@ -1,4 +1,4 @@
-from typing import List, Dict
+from typing import List
 from intent.classifier import IntentClassification
 
 class AmbiguityResolver:

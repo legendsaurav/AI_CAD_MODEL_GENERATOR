@@ -3,7 +3,7 @@ Config Validation Schema for Geometry Engine
 ==============================================
 Pydantic models that validate config.yaml at load time.
 """
-from typing import List, Optional, Literal, Dict, Any
+from typing import List, Optional, Literal, Dict
 from pydantic import BaseModel, Field, field_validator
 import yaml
 import os

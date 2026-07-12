@@ -51,5 +51,4 @@ if __name__ == "__main__":
         relation="Contains",
     ))
 
-    import json
     print(ggl.to_json())  # noqa: T201 — CLI test harness

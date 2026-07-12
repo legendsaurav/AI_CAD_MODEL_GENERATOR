@@ -14,9 +14,9 @@ _REPO_ROOT = os.path.normpath(os.path.join(os.path.dirname(__file__), ".."))
 if _REPO_ROOT not in sys.path:
     sys.path.insert(0, _REPO_ROOT)
 
-from probing.analyzer import FeatureAnalyzer
-from visualization.plotter import VisualizationPlotter
-from utils.logger import ExperimentLogger
+from probing.analyzer import FeatureAnalyzer  # noqa: E402
+from visualization.plotter import VisualizationPlotter  # noqa: E402
+from utils.logger import ExperimentLogger  # noqa: E402
 
 
 # ── Mock feature generator ────────────────────────────────────────────────
@@ -36,13 +36,13 @@ def generate_mock_features(log_dir: str):
 
     for t in timesteps:
         base = np.random.randn(1, 256, 1024).astype(np.float32) * (1.0 - t)
-        for l in layers:
+        for layer in layers:
             feat = base + np.random.randn(1, 256, 1024).astype(np.float32) * 0.1
             # Inject structured signal into layer 12 so rankings work meaningfully
-            if l == 12:
+            if layer == 12:
                 signal = np.sin(np.linspace(0, 10, 256))[:, None].astype(np.float32)
                 feat[0, :, :5] += signal * 2.0
-            key      = f"L{l}_t{t:.2f}"
+            key      = f"L{layer}_t{t:.2f}"
             filename = f"single_{key}.npy"
             np.save(os.path.join(log_dir, filename), feat)
             features[key] = feat
@@ -110,7 +110,7 @@ def main():
     print("📊 Ranking Layers by Geometric Distinctness...")
     rankings = analyzer.rank_layers(features)
 
-    print(f"\n🏆 Top-5 Layer/Timestep combinations:")
+    print("\n🏆 Top-5 Layer/Timestep combinations:")
     for i, (name, score) in enumerate(rankings[:5], 1):
         print(f"   {i}. {name}  →  {score:.4f}")
 

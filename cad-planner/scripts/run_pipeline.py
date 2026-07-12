@@ -12,27 +12,27 @@ _SHARED_SCHEMAS = os.path.abspath(os.path.join(_ROOT_DIR, '..', 'shared-schemas'
 if _SHARED_SCHEMAS not in sys.path:
     sys.path.insert(0, _SHARED_SCHEMAS)
 
-from ggl_parser.ggl_parser import GGLParser
-from validator.geometry import GeometryValidator
-from intent.classifier import IntentClassifier
-from dependency.graph import DependencyGraph
-from construction.graph import ConstructionGraph, ConstructionNode
-from construction.sketch_generator import SketchGenerator
-from construction.sketch_optimizer import SketchOptimizer
-from constraints.infer import ConstraintInferer
-from constraints.repair import ConstraintRepairer
-from manufacturing.analyzer import ManufacturingAnalyzer
-from rules.engine import RuleEngine
-from memory.planner_memory import PlannerMemory
-from ambiguity.resolver import AmbiguityResolver
-from beam_search.planner import BeamSearchPlanner
-from optimizer.feature_tree_optimizer import FeatureTreeOptimizer
-from cal.generator import CALGenerator
-from optimizer.cal_optimizer import CALOptimizer
-from cal.schema import CALDocument, PlanningTrace
-from cal.validator import CALValidator
-from cal.exporter import CALExporter
-from utils.logger import setup_logger
+from ggl_parser.ggl_parser import GGLParser  # noqa: E402
+from validator.geometry import GeometryValidator  # noqa: E402
+from intent.classifier import IntentClassifier  # noqa: E402
+from dependency.graph import DependencyGraph  # noqa: E402
+from construction.graph import ConstructionGraph  # noqa: E402
+from construction.sketch_generator import SketchGenerator  # noqa: E402
+from construction.sketch_optimizer import SketchOptimizer  # noqa: E402
+from constraints.infer import ConstraintInferer  # noqa: E402
+from constraints.repair import ConstraintRepairer  # noqa: E402
+from manufacturing.analyzer import ManufacturingAnalyzer  # noqa: E402
+from rules.engine import RuleEngine  # noqa: E402
+from memory.planner_memory import PlannerMemory  # noqa: E402
+from ambiguity.resolver import AmbiguityResolver  # noqa: E402
+from beam_search.planner import BeamSearchPlanner  # noqa: E402
+from optimizer.feature_tree_optimizer import FeatureTreeOptimizer  # noqa: E402
+from cal.generator import CALGenerator  # noqa: E402
+from optimizer.cal_optimizer import CALOptimizer  # noqa: E402
+from cal.schema import CALDocument, PlanningTrace  # noqa: E402
+from cal.validator import CALValidator  # noqa: E402
+from cal.exporter import CALExporter  # noqa: E402
+from utils.logger import setup_logger  # noqa: E402
 
 logger = setup_logger("pipeline_runner")
 
@@ -99,7 +99,7 @@ def run():
     # ─────────────────────────────────────────────────────────
     logger.info("Stage 4: Dependency Graph Generation")
     dep_builder = DependencyGraph()
-    dag = dep_builder.build(ggl)
+    dep_builder.build(ggl)
     topo_order = dep_builder.get_topological_order()
     logger.info(f"  Topological order: {topo_order}")
     trace.topological_order = list(topo_order)

@@ -8,7 +8,7 @@ Schema for the feedback loop:
 This enables iterative quality improvement of the CAD reconstruction.
 """
 from pydantic import BaseModel, Field
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Optional
 
 
 class GeometryDifference(BaseModel):

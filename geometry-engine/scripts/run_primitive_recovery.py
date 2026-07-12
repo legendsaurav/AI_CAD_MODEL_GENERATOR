@@ -13,12 +13,12 @@ _REPO_ROOT = os.path.normpath(os.path.join(os.path.dirname(__file__), ".."))
 if _REPO_ROOT not in sys.path:
     sys.path.insert(0, _REPO_ROOT)
 
-from utils.config import ConfigManager
-from utils.logger import ExperimentLogger
-from graph.ggl import GeometryGraphLanguage, GGLNode, GGLEdge
-from primitive.generator import PrimitiveProposalGenerator
-from primitive.estimator import ParameterEstimator
-from primitive.optimizer import GeometricOptimizer
+from utils.config import ConfigManager  # noqa: E402
+from utils.logger import ExperimentLogger  # noqa: E402
+from graph.ggl import GeometryGraphLanguage, GGLNode, GGLEdge  # noqa: E402
+from primitive.generator import PrimitiveProposalGenerator  # noqa: E402
+from primitive.estimator import ParameterEstimator  # noqa: E402
+from primitive.optimizer import GeometricOptimizer  # noqa: E402
 
 
 def build_mock_ggl() -> GeometryGraphLanguage:
@@ -97,7 +97,7 @@ def main():
     }
     logger.log_metrics(metrics, step=3)
 
-    print(f"\n📋 Primitive Recovery Summary:")
+    print("\n📋 Primitive Recovery Summary:")
     for k, v in metrics.items():
         print(f"   {k}: {v}")
 

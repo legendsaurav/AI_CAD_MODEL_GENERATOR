@@ -1,5 +1,5 @@
 import networkx as nx
-from typing import List, Dict, Set
+from typing import List
 from ggl_parser.ggl_parser import GeometryGraphLanguage
 
 class DependencyGraph:

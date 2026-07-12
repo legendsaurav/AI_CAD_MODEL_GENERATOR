@@ -7,7 +7,6 @@ import json
 import logging
 import sys
 import os
-from typing import List
 
 # Add shared-schemas to path
 _AGENT_ROOT = os.path.normpath(os.path.dirname(__file__))
@@ -15,7 +14,7 @@ _SHARED_SCHEMAS = os.path.normpath(os.path.join(_AGENT_ROOT, "..", "shared-schem
 if _SHARED_SCHEMAS not in sys.path:
     sys.path.insert(0, _SHARED_SCHEMAS)
 
-from shared_schemas.cal_schema import CALDocument, CALAction
+from shared_schemas.cal_schema import CALDocument  # noqa: E402
 
 logger = logging.getLogger("desktop_agent.consumer")
 

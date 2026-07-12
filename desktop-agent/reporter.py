@@ -7,7 +7,6 @@ and the Clicky Tutor.
 import logging
 import sys
 import os
-import time
 from typing import List, Dict, Any
 
 _AGENT_ROOT = os.path.normpath(os.path.dirname(__file__))
@@ -15,7 +14,7 @@ _SHARED_SCHEMAS = os.path.normpath(os.path.join(_AGENT_ROOT, "..", "shared-schem
 if _SHARED_SCHEMAS not in sys.path:
     sys.path.insert(0, _SHARED_SCHEMAS)
 
-from shared_schemas.execution_report import ExecutionReport, ActionResult
+from shared_schemas.execution_report import ExecutionReport, ActionResult  # noqa: E402
 
 logger = logging.getLogger("desktop_agent.reporter")
 

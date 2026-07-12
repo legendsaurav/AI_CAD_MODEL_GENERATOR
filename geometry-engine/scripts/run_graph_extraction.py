@@ -13,9 +13,9 @@ _REPO_ROOT = os.path.normpath(os.path.join(os.path.dirname(__file__), ".."))
 if _REPO_ROOT not in sys.path:
     sys.path.insert(0, _REPO_ROOT)
 
-from utils.config import ConfigManager
-from utils.logger import ExperimentLogger
-from graph.generator import GraphGenerator
+from utils.config import ConfigManager  # noqa: E402
+from utils.logger import ExperimentLogger  # noqa: E402
+from graph.generator import GraphGenerator  # noqa: E402
 
 
 def mock_fused_features(batch_size: int = 1, num_tokens: int = 256, hidden_dim: int = 1024):
@@ -61,7 +61,7 @@ def main():
     }
     logger.log_metrics(metrics, step=1)
 
-    print(f"\n📋 Graph Summary:")
+    print("\n📋 Graph Summary:")
     print(f"   Total nodes : {len(ggl.nodes)}")
     print(f"   Total edges : {len(ggl.edges)}")
     for n in ggl.nodes[:5]:

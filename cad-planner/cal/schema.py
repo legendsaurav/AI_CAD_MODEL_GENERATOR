@@ -14,7 +14,7 @@ if _SHARED_SCHEMAS not in sys.path:
     sys.path.insert(0, _SHARED_SCHEMAS)
 
 # Re-export everything from the authoritative source
-from shared_schemas.cal_schema import (
+from shared_schemas.cal_schema import (  # noqa: E402,F401
     ActionReasoning,
     CALActionBase,
     CreateSketchAction,
@@ -25,6 +25,19 @@ from shared_schemas.cal_schema import (
     FilletAction,
     ChamferAction,
     CALAction,
-    PlanningTrace,
     CALDocument,
 )
+
+__all__ = [
+    "ActionReasoning",
+    "CALActionBase",
+    "CreateSketchAction",
+    "DrawCircleAction",
+    "DrawRectangleAction",
+    "ExtrudeAction",
+    "RevolveAction",
+    "FilletAction",
+    "ChamferAction",
+    "CALAction",
+    "CALDocument",
+]

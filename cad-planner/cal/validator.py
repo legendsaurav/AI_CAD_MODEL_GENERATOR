@@ -1,4 +1,3 @@
-from typing import List
 from cal.schema import CALDocument
 
 class CALValidator:

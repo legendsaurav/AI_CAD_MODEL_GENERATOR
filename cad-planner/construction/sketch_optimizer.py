@@ -1,4 +1,6 @@
-from construction.sketch_generator import SketchProfile
+from typing import List
+
+from construction.sketch_generator import SketchProfile, SketchEntityUnion
 
 class SketchOptimizer:
     """
@@ -11,8 +13,8 @@ class SketchOptimizer:
         """
         Optimizes a sketch profile in-place or returns a new one.
         """
-        optimized_entities = []
-        
+        optimized_entities: List[SketchEntityUnion] = []
+
         for entity in profile.entities:
             # Use entity_type string field instead of isinstance() because
             # Pydantic deserialization returns the base SketchEntity, not subclasses.

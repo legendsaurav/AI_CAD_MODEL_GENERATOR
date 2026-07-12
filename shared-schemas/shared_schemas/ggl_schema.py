@@ -4,7 +4,6 @@ shared_schemas/ggl_schema.py — Authoritative Geometry Graph Language Schema
 This is the SINGLE SOURCE OF TRUTH for GGL. Both geometry-engine and
 cad-planner must import from here. No duplication allowed.
 """
-import json
 from typing import List, Dict, Any, Optional
 from pydantic import BaseModel, Field
 

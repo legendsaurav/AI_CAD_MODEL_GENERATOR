@@ -16,7 +16,6 @@ from __future__ import annotations
 import logging
 import os
 import sys
-import json
 from typing import Any, Dict, List, Optional
 
 _ENGINE_ROOT = os.path.normpath(os.path.join(os.path.dirname(__file__), ".."))
@@ -24,7 +23,7 @@ _SHARED = os.path.normpath(os.path.join(_ENGINE_ROOT, "..", "shared-schemas"))
 if _SHARED not in sys.path:
     sys.path.insert(0, _SHARED)
 
-from shared_schemas.verification_report import (
+from shared_schemas.verification_report import (  # noqa: E402
     VerificationMetric,
     PrimitiveVerification,
     VerificationReport,

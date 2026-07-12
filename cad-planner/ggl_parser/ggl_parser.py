@@ -11,7 +11,6 @@ This module only adds parsing + business rule validation.
 import json
 import sys
 import os
-from typing import Dict, Any, List
 
 from pydantic import ValidationError
 
@@ -21,7 +20,7 @@ _SHARED_SCHEMAS = os.path.normpath(os.path.join(_PLANNER_ROOT, "..", "shared-sch
 if _SHARED_SCHEMAS not in sys.path:
     sys.path.insert(0, _SHARED_SCHEMAS)
 
-from shared_schemas.ggl_schema import GeometryGraphLanguage, GGLNode, GGLEdge, GGLMetadata
+from shared_schemas.ggl_schema import GeometryGraphLanguage  # noqa: E402
 
 
 class GGLParser:

@@ -15,9 +15,9 @@ _REPO_ROOT = os.path.normpath(os.path.join(os.path.dirname(__file__), ".."))
 if _REPO_ROOT not in sys.path:
     sys.path.insert(0, _REPO_ROOT)
 
-from hooks.feature_extractor import DiTFeatureExtractor
-from graph.ggl import GeometryGraphLanguage, GGLNode, GGLEdge
-from utils.config import ConfigManager
+from hooks.feature_extractor import DiTFeatureExtractor  # noqa: E402
+from graph.ggl import GeometryGraphLanguage, GGLNode, GGLEdge  # noqa: E402
+from utils.config import ConfigManager  # noqa: E402
 
 
 # ── Mock DiT ──────────────────────────────────────────────────────────────
@@ -70,12 +70,15 @@ class TestDiTFeatureExtractor(unittest.TestCase):
         self.assertIn(0.5, feats["single_blocks"])
 
         db = feats["double_blocks"][0.5]
-        self.assertIn(1, db); self.assertIn(3, db); self.assertNotIn(0, db)
+        self.assertIn(1, db)
+        self.assertIn(3, db)
+        self.assertNotIn(0, db)
         self.assertEqual(db[1]["img"].shape, (2, 3072, 1024))
         self.assertEqual(db[1]["txt"].shape, (2, 1370, 1024))
 
         sb = feats["single_blocks"][0.5]
-        self.assertIn(0, sb); self.assertIn(7, sb)
+        self.assertIn(0, sb)
+        self.assertIn(7, sb)
         self.assertEqual(sb[0].shape, (2, 4442, 1024))
 
     def test_no_capture_at_wrong_timestep(self):

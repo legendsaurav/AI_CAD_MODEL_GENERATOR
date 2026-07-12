@@ -1,7 +1,6 @@
-from typing import List, Dict, Any
-from construction.graph import ConstructionGraph, ConstructionNode
+from typing import List, Dict, Any, Optional
+from construction.graph import ConstructionNode
 from construction.sketch_generator import SketchProfile
-from cal.schema import CALAction
 
 class RuleEngine:
     """
@@ -11,7 +10,7 @@ class RuleEngine:
     
     @staticmethod
     def apply_rules(primitive_type: str, intent: str, sketch: SketchProfile,
-                    ggl_params: Dict[str, Any] = None) -> List[ConstructionNode]:
+                    ggl_params: Optional[Dict[str, Any]] = None) -> List[ConstructionNode]:
         """
         Maps an intent and a sketch to a specific sequence of construction nodes.
         ggl_params: original GGL node parameters to extract depth/height/angle etc.

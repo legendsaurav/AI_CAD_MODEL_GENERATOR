@@ -129,16 +129,26 @@ class ManufacturingAnalyzer:
             material, MATERIAL_CONSTRAINTS["default"]
         )
 
-    def analyze(self, ggl) -> ManufacturabilityScore:
+    @classmethod
+    def analyze(cls, ggl, material: str = "default") -> ManufacturabilityScore:
         """
         Analyze a GGL for manufacturing feasibility.
 
+        Convenience entry point: constructs an analyzer for the given
+        material and runs the analysis. Callers use it statically, e.g.
+        ``ManufacturingAnalyzer.analyze(ggl)``.
+
         Args:
             ggl: GeometryGraphLanguage instance (with .nodes attribute).
+            material: Material profile to evaluate against.
 
         Returns:
             ManufacturabilityScore with issues and overall score.
         """
+        return cls(material)._analyze(ggl)
+
+    def _analyze(self, ggl) -> ManufacturabilityScore:
+        """Run the manufacturing analysis using this instance's constraints."""
         issues: List[ManufacturingIssue] = []
         score = 1.0
 

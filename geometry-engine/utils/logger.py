@@ -100,6 +100,71 @@ def setup_logger(
     return logger
 
 
+class ExperimentLogger:
+    """Filesystem-backed logger for a single pipeline experiment run.
+
+    Creates a timestamped experiment directory (with a ``plots`` subdir) plus
+    a shared log directory tree, and provides helpers to persist configs,
+    metrics, and GGL artifacts produced during a run.
+    """
+
+    def __init__(
+        self,
+        base_experiments_dir: str = "experiments",
+        log_base_dir: str = "logs",
+        experiment_name: Optional[str] = None,
+    ) -> None:
+        self._log_base_dir = log_base_dir
+
+        stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        name = experiment_name or f"exp_{stamp}"
+        self._exp_dir = os.path.join(base_experiments_dir, name)
+
+        os.makedirs(self._exp_dir, exist_ok=True)
+        os.makedirs(os.path.join(self._exp_dir, "plots"), exist_ok=True)
+        os.makedirs(log_base_dir, exist_ok=True)
+        # Pre-create the default feature log directory used by the probing stage.
+        os.makedirs(os.path.join(log_base_dir, "features"), exist_ok=True)
+
+    def get_exp_dir(self) -> str:
+        """Return the root directory for this experiment's artifacts."""
+        return self._exp_dir
+
+    def get_log_dir(self, name: str) -> str:
+        """Return (creating if needed) a named subdirectory under the log root."""
+        path = os.path.join(self._log_base_dir, name)
+        os.makedirs(path, exist_ok=True)
+        return path
+
+    def log_config(self, config: Dict[str, Any], filename: str = "config.json") -> str:
+        """Persist the run configuration as JSON in the experiment directory."""
+        return self._write_json(config, filename)
+
+    def log_metrics(
+        self, metrics: Dict[str, Any], step: Optional[int] = None
+    ) -> str:
+        """Append a metrics record (optionally tagged with a step) to metrics.jsonl."""
+        record: Dict[str, Any] = {
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "step": step,
+            "metrics": metrics,
+        }
+        path = os.path.join(self._exp_dir, "metrics.jsonl")
+        with open(path, "a", encoding="utf-8") as f:
+            f.write(json.dumps(record) + "\n")
+        return path
+
+    def save_ggl(self, ggl_data: Dict[str, Any], filename: str = "ggl.json") -> str:
+        """Persist a serialized GGL document as JSON in the experiment directory."""
+        return self._write_json(ggl_data, filename)
+
+    def _write_json(self, data: Dict[str, Any], filename: str) -> str:
+        path = os.path.join(self._exp_dir, filename)
+        with open(path, "w", encoding="utf-8") as f:
+            json.dump(data, f, indent=2)
+        return path
+
+
 class LogContext:
     """Context manager that adds fields to all log records within scope."""
 

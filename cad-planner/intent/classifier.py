@@ -1,8 +1,8 @@
-from typing import Dict, List, Any
-from ggl_parser.ggl_parser import GeometryGraphLanguage, GGLNode
+from typing import Dict, List, Optional
+from ggl_parser.ggl_parser import GeometryGraphLanguage
 
 class IntentClassification:
-    def __init__(self, primary_intent: str, alternatives: List[str] = None):
+    def __init__(self, primary_intent: str, alternatives: Optional[List[str]] = None):
         self.primary_intent = primary_intent
         self.alternatives = alternatives or []
 

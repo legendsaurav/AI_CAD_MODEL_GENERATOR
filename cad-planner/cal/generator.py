@@ -7,11 +7,10 @@ Now includes:
   - Source GGL node traceability (source_ggl_node_id)
   - PlanningTrace emission
 """
-from typing import List, Optional
+from typing import List
 from construction.graph import ConstructionGraph
 from cal.schema import (
-    CALAction, CreateSketchAction, DrawCircleAction, DrawRectangleAction,
-    ExtrudeAction, RevolveAction
+    CALAction, CreateSketchAction, DrawCircleAction, ExtrudeAction, RevolveAction
 )
 from reasoning.graph import ReasonGraphGenerator
 

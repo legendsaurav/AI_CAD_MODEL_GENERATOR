@@ -1,7 +1,6 @@
 from typing import Optional, List
 from memory.pattern_database import PatternDatabase
 from memory.retrieval import MemoryRetrieval
-from construction.graph import ConstructionNode
 
 class PlannerMemory:
     """

@@ -15,7 +15,7 @@ CRITICAL INVARIANTS:
   3. Meshes may only be used for visualization or post-hoc verification.
 """
 import logging
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any
 
 logger = logging.getLogger("geometry_engine.verification")
 

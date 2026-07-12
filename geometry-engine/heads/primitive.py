@@ -118,7 +118,7 @@ class PrimitiveHead(GeometryHeadBase):
 
     def to_ggl_nodes(
         self,
-        predictions: Dict[str, torch.Tensor],
+        predictions: Dict[str, Any],
         threshold: float = 0.5,
     ) -> List[GGLNode]:
         """Convert predictions to GGL primitive nodes.

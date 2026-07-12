@@ -13,7 +13,7 @@ FIX: Try to register with `with_kwargs=True` (PyTorch ≥ 2.0).
 """
 import torch
 import torch.nn as nn
-from typing import Dict, List, Optional, Any
+from typing import Dict, List, Optional, Any, cast
 
 
 class DiTFeatureExtractor:
@@ -42,8 +42,8 @@ class DiTFeatureExtractor:
 
     def register_hooks(
         self,
-        double_indices: List[int] = None,
-        single_indices: List[int] = None,
+        double_indices: Optional[List[int]] = None,
+        single_indices: Optional[List[int]] = None,
     ):
         """Register hooks on specified layer indices of double_blocks and single_blocks."""
         self.clear_hooks()
@@ -64,18 +64,20 @@ class DiTFeatureExtractor:
 
         # ── Double-stream block hooks ─────────────────────────────────────────
         if hasattr(self.model, "double_blocks") and double_indices is not None:
+            double_blocks = cast(nn.ModuleList, self.model.double_blocks)
             for i in double_indices:
-                if i < len(self.model.double_blocks):
-                    h = self.model.double_blocks[i].register_forward_hook(
+                if i < len(double_blocks):
+                    h = double_blocks[i].register_forward_hook(
                         self._double_block_hook(i)
                     )
                     self.hooks.append(h)
 
         # ── Single-stream block hooks ─────────────────────────────────────────
         if hasattr(self.model, "single_blocks") and single_indices is not None:
+            single_blocks = cast(nn.ModuleList, self.model.single_blocks)
             for i in single_indices:
-                if i < len(self.model.single_blocks):
-                    h = self.model.single_blocks[i].register_forward_hook(
+                if i < len(single_blocks):
+                    h = single_blocks[i].register_forward_hook(
                         self._single_block_hook(i)
                     )
                     self.hooks.append(h)

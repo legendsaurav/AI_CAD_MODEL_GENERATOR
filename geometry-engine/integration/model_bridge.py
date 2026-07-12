@@ -13,10 +13,8 @@ ARCHITECTURE INVARIANT:
   The decoded mesh is NEVER used as a source for CAD reconstruction.
   Meshes may only be used for visualization or verification.
 """
-import os
-import sys
 import logging
-from typing import Dict, Any, Optional, List
+from typing import Dict, Any, List, Optional
 
 logger = logging.getLogger("geometry_engine.integration")
 
@@ -94,9 +92,9 @@ class ModelBridge:
     def extract_features(
         self,
         image_path: str,
-        target_timesteps: List[float] = None,
-        double_indices: List[int] = None,
-        single_indices: List[int] = None,
+        target_timesteps: Optional[List[float]] = None,
+        double_indices: Optional[List[int]] = None,
+        single_indices: Optional[List[int]] = None,
     ) -> Dict[str, Any]:
         """
         Runs Hunyuan3D DiT inference on the image and captures intermediate
@@ -154,9 +152,8 @@ class ModelBridge:
         single_indices: List[int],
     ) -> Dict[str, Any]:
         """Generates mock features matching the real schema for testing."""
-        import numpy as np
 
-        features = {
+        features: Dict[str, Any] = {
             "double_blocks": {},
             "single_blocks": {},
             "final_layer": None,

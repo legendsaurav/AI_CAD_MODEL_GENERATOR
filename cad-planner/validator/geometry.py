@@ -1,6 +1,5 @@
 import networkx as nx
-from typing import Dict, List, Any
-from ggl_parser.ggl_parser import GeometryGraphLanguage, GGLNode
+from ggl_parser.ggl_parser import GeometryGraphLanguage
 
 class GeometryValidator:
     """

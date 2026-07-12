@@ -7,23 +7,21 @@ Orchestrates the full desktop agent workflow:
 
 This is the main entry point for the desktop agent.
 """
-import json
 import logging
 import sys
 import os
 import time
-from typing import Optional
 
 _AGENT_ROOT = os.path.normpath(os.path.dirname(__file__))
 _SHARED_SCHEMAS = os.path.normpath(os.path.join(_AGENT_ROOT, "..", "shared-schemas"))
 if _SHARED_SCHEMAS not in sys.path:
     sys.path.insert(0, _SHARED_SCHEMAS)
 
-from cal_consumer import CALConsumer
-from state_machine import ExecutionStateMachine
-from executor import FreeCADExecutor, BaseExecutor
-from verifier import ExecutionVerifier
-from reporter import ExecutionReporter
+from cal_consumer import CALConsumer  # noqa: E402
+from state_machine import ExecutionStateMachine  # noqa: E402
+from executor import FreeCADExecutor, BaseExecutor  # noqa: E402
+from verifier import ExecutionVerifier  # noqa: E402
+from reporter import ExecutionReporter  # noqa: E402
 
 logger = logging.getLogger("desktop_agent.pipeline")
 

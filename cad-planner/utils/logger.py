@@ -1,10 +1,11 @@
 import logging
 import os
+from typing import Optional
 
 # Resolve log path relative to the cad-planner root, not the caller's CWD
 _ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 
-def setup_logger(name: str, log_file: str = None, level=logging.INFO):
+def setup_logger(name: str, log_file: Optional[str] = None, level=logging.INFO):
     """
     Standardized hierarchical experiment tracking logger.
     """

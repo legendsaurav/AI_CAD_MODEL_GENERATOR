@@ -16,8 +16,8 @@ _REPO_ROOT = os.path.normpath(os.path.join(os.path.dirname(__file__), ".."))
 if _REPO_ROOT not in sys.path:
     sys.path.insert(0, _REPO_ROOT)
 
-from utils.logger import ExperimentLogger
-from graph.ggl import GeometryGraphLanguage, GGLNode, GGLEdge
+from utils.logger import ExperimentLogger  # noqa: E402
+from graph.ggl import GeometryGraphLanguage, GGLNode, GGLEdge  # noqa: E402
 
 
 # ── Build a sample fully-parameterised GGL ───────────────────────────────
@@ -33,7 +33,9 @@ def build_sample_parameterised_ggl() -> GeometryGraphLanguage:
     body  = GGLNode(node_id="part_body",  type="Part", semantic_label="Main Body",     confidence=0.92)
     shaft = GGLNode(node_id="part_shaft", type="Part", semantic_label="Shaft",         confidence=0.85)
     hole  = GGLNode(node_id="part_hole",  type="Part", semantic_label="Mounting Hole", confidence=0.79)
-    ggl.add_node(body); ggl.add_node(shaft); ggl.add_node(hole)
+    ggl.add_node(body)
+    ggl.add_node(shaft)
+    ggl.add_node(hole)
 
     # Analytic primitives assigned by Version 3
     prim_body = GGLNode(
@@ -56,7 +58,9 @@ def build_sample_parameterised_ggl() -> GeometryGraphLanguage:
                     "center_x": 30.0, "center_y": 0.0, "center_z": 0.0,
                     "axis_x": 0.0, "axis_y": 0.0, "axis_z": 1.0},
     )
-    ggl.add_node(prim_body); ggl.add_node(prim_shaft); ggl.add_node(prim_hole)
+    ggl.add_node(prim_body)
+    ggl.add_node(prim_shaft)
+    ggl.add_node(prim_hole)
 
     # Hierarchy edges
     ggl.add_edge(GGLEdge(source_id="part_body",  target_id="prim_body_0",  relation="Instantiates", confidence=0.91))

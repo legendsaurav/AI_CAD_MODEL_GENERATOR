@@ -13,7 +13,7 @@ from __future__ import annotations
 
 import logging
 import time
-from typing import Any, Dict, Optional
+from typing import Any, Dict
 
 from executor import BaseExecutor
 
@@ -217,7 +217,9 @@ class SolidWorksExecutor(BaseExecutor):
         """Export the SolidWorks model as STL."""
         try:
             if self._model:
-                ext = ".stl" if format == "stl" else ".step"
+                # NOTE: `format` is currently ignored — SaveAs derives the
+                # export type from output_path's extension. Preserved as a
+                # known limitation rather than silently computing an unused var.
                 self._model.Extension.SaveAs(
                     output_path, 0, 2, None, None, None
                 )

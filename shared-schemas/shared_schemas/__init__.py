@@ -47,3 +47,23 @@ from shared_schemas.verification_report import (
 from shared_schemas.logging_config import (
     setup_structured_logging, get_correlation_id, set_correlation_id
 )
+
+__all__ = [
+    # Core schemas
+    "GGLNode", "GGLEdge", "GGLMetadata", "GeometryGraphLanguage",
+    "ActionReasoning", "CALActionBase", "CreateSketchAction", "DrawCircleAction",
+    "DrawRectangleAction", "ExtrudeAction", "RevolveAction", "FilletAction",
+    "ChamferAction", "CALAction", "CALDocument",
+    "ExecutionReport", "ActionResult",
+    "RefinementRequest", "GeometryDifference",
+    # Versioning
+    "SchemaVersion", "VersionedSchema",
+    # Phase 1 schemas
+    "RejectedAlternative", "ReasonNode", "ReasonEdge", "ReasonGraph",
+    "ScoringBreakdown", "BeamCandidate", "AmbiguityResolution",
+    "RetrievedMemory", "RejectedPlan", "PlanningTrace",
+    "EventType", "PipelineStage", "EventPayload", "StageResult", "PipelineEvent",
+    "VerificationMetric", "PrimitiveVerification", "VerificationReport",
+    # Logging
+    "setup_structured_logging", "get_correlation_id", "set_correlation_id",
+]

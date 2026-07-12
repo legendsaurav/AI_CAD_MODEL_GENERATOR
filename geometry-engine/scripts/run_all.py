@@ -14,7 +14,7 @@ _REPO_ROOT = os.path.normpath(os.path.join(os.path.dirname(__file__), ".."))
 if _REPO_ROOT not in sys.path:
     sys.path.insert(0, _REPO_ROOT)
 
-from utils.config import ConfigManager
+from utils.config import ConfigManager  # noqa: E402
 
 
 # ── Stage registry ────────────────────────────────────────────────────────

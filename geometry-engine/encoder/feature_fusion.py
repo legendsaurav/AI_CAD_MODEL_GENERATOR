@@ -18,7 +18,7 @@ ARCHITECTURE RULE:
 from __future__ import annotations
 
 import logging
-from typing import Any, Dict, List, Optional
+from typing import Dict, List, Optional
 
 import torch
 import torch.nn as nn
@@ -156,6 +156,7 @@ class TimestepFusion(nn.Module):
     ) -> None:
         super().__init__()
         self.num_timesteps = num_timesteps
+        self.fuser: nn.Module
         if fusion_type == "learned_weight":
             self.fuser = LearnedWeightFusion(num_timesteps)
         elif fusion_type == "concat_project":
@@ -255,8 +256,8 @@ class MultiScaleFeatureFusion(nn.Module):
         """
         if timestep_order is None:
             timestep_order = sorted(features.keys())[:self.num_timesteps]
-        if layer_order is None and timestep_order:
-            first_ts = features[timestep_order[0]]
+        if layer_order is None:
+            first_ts = features[timestep_order[0]] if timestep_order else {}
             layer_order = sorted(first_ts.keys())[:self.num_layers]
 
         timestep_features: List[torch.Tensor] = []

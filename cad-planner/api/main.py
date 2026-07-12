@@ -1,20 +1,14 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
-from typing import Dict, Any
 
 from ggl_parser.ggl_parser import GGLParser
 from validator.geometry import GeometryValidator
 from intent.classifier import IntentClassifier
 from dependency.graph import DependencyGraph
-from construction.graph import ConstructionGraph, ConstructionNode
+from construction.graph import ConstructionGraph
 from construction.sketch_generator import SketchGenerator
 from construction.sketch_optimizer import SketchOptimizer
-from constraints.infer import ConstraintInferer
-from constraints.repair import ConstraintRepairer
-from manufacturing.analyzer import ManufacturingAnalyzer
 from rules.engine import RuleEngine
-from memory.planner_memory import PlannerMemory
-from ambiguity.resolver import AmbiguityResolver
 from beam_search.planner import BeamSearchPlanner
 from optimizer.feature_tree_optimizer import FeatureTreeOptimizer
 from cal.generator import CALGenerator
@@ -40,7 +34,7 @@ def validate_geometry(req: ParseRequest):
     try:
         ggl = GGLParser.parse(req.ggl_json)
         validator = GeometryValidator(ggl)
-        valid_ggl = validator.validate()
+        validator.validate()
         return {"status": "success", "message": "Geometry is valid"}
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
@@ -53,7 +47,7 @@ def generate_construction_graph(req: ParseRequest):
         GeometryValidator(ggl).validate()
         intents = IntentClassifier().classify(ggl)
         dep = DependencyGraph()
-        dag = dep.build(ggl)
+        dep.build(ggl)
         topo_order = dep.get_topological_order()
         
         cg = ConstructionGraph()
@@ -83,7 +77,7 @@ def plan(req: ParseRequest):
         GeometryValidator(ggl).validate()
         intents = IntentClassifier().classify(ggl)
         dep = DependencyGraph()
-        dag = dep.build(ggl)
+        dep.build(ggl)
         topo_order = dep.get_topological_order()
         
         sketches = {}

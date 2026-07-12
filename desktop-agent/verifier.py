@@ -23,7 +23,7 @@ _SHARED_SCHEMAS = os.path.normpath(os.path.join(_AGENT_ROOT, "..", "shared-schem
 if _SHARED_SCHEMAS not in sys.path:
     sys.path.insert(0, _SHARED_SCHEMAS)
 
-from shared_schemas.verification_report import (
+from shared_schemas.verification_report import (  # noqa: E402
     VerificationMetric,
     PrimitiveVerification,
     VerificationReport,

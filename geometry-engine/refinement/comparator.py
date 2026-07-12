@@ -329,7 +329,10 @@ class GeometryComparator:
         """Load mesh and uniformly sample surface points."""
         try:
             import trimesh
-            mesh = trimesh.load(mesh_path, force="mesh")
+            from typing import cast
+            # force="mesh" guarantees a Trimesh at runtime; the stubs return the
+            # broader Geometry union, so cast explicitly for the type checker.
+            mesh = cast(trimesh.Trimesh, trimesh.load(mesh_path, force="mesh"))
             points, face_indices = trimesh.sample.sample_surface(
                 mesh, self.num_sample_points
             )

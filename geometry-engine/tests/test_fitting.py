@@ -10,25 +10,22 @@ Validates:
 """
 import os
 import sys
-import math
 
 import numpy as np
-import pytest
 
 # Ensure geometry-engine root is on path
 _ROOT = os.path.normpath(os.path.join(os.path.dirname(__file__), ".."))
 if _ROOT not in sys.path:
     sys.path.insert(0, _ROOT)
 
-from primitive.fitting import (
+from primitive.fitting import (  # noqa: E402
     LevenbergMarquardtFitter,
     RANSACFitter,
-    FitResult,
     _cylinder_residuals,
     _sphere_residuals,
     _plane_residuals,
 )
-from refinement.comparator import (
+from refinement.comparator import (  # noqa: E402
     chamfer_distance,
     hausdorff_distance,
     volume_iou,

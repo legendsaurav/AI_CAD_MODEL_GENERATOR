@@ -15,8 +15,7 @@ from __future__ import annotations
 
 import logging
 import math
-from collections import Counter
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional
 
 from memory.pattern_database import PatternDatabase
 

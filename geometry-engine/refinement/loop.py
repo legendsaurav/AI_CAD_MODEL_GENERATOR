@@ -24,7 +24,7 @@ import time
 from typing import Any, Callable, Dict, List, Optional
 
 from refinement.comparator import GeometryComparator
-from refinement.convergence import ConvergenceDetector, ConvergenceState
+from refinement.convergence import ConvergenceDetector
 
 logger = logging.getLogger("geometry_engine.refinement")
 

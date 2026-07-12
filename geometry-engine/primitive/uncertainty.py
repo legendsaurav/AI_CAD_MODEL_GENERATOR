@@ -15,11 +15,10 @@ Methods:
 from __future__ import annotations
 
 import logging
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Dict, List, Tuple
 
 import torch
 import torch.nn as nn
-import numpy as np
 
 logger = logging.getLogger("geometry_engine.primitive.uncertainty")
 

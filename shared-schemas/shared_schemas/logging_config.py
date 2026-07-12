@@ -18,7 +18,6 @@ Usage::
 """
 import logging
 import logging.handlers
-import os
 import sys
 import uuid
 from contextvars import ContextVar

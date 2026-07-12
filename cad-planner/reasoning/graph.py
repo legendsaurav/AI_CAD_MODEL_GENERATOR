@@ -30,7 +30,7 @@ _SHARED = os.path.normpath(os.path.join(_PLANNER_ROOT, "..", "shared-schemas"))
 if _SHARED not in sys.path:
     sys.path.insert(0, _SHARED)
 
-from shared_schemas.reason_graph import (
+from shared_schemas.reason_graph import (  # noqa: E402
     RejectedAlternative,
     ReasonNode,
     ReasonEdge,
@@ -38,7 +38,7 @@ from shared_schemas.reason_graph import (
 )
 
 # Also import ActionReasoning for backward-compatible API
-from cal.schema import ActionReasoning
+from cal.schema import ActionReasoning  # noqa: E402
 
 logger = logging.getLogger("cad_planner.reasoning.graph")
 

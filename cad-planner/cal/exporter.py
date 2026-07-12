@@ -1,4 +1,3 @@
-import json
 from cal.schema import CALDocument
 
 class CALExporter:

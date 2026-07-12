@@ -126,7 +126,7 @@ def test_dependency_graph():
     from dependency.graph import DependencyGraph
     ggl = GGLParser.parse(MOCK_GGL_STR)
     dep = DependencyGraph()
-    dag = dep.build(ggl)
+    dep.build(ggl)
     order = dep.get_topological_order()
     # n1 must come before n2 (Box contains Cylinder)
     assert order.index("n1") < order.index("n2")
@@ -149,7 +149,7 @@ def test_sketch_generator_box():
         assert e.entity_type == "line"
 
 def test_sketch_optimizer_removes_zero_length():
-    from construction.sketch_generator import SketchGenerator, SketchProfile, SketchLine
+    from construction.sketch_generator import SketchProfile, SketchLine
     from construction.sketch_optimizer import SketchOptimizer
     profile = SketchProfile(id="test", plane="XY")
     profile.entities = [
@@ -377,9 +377,6 @@ def test_full_pipeline():
     from construction.graph import ConstructionGraph
     from construction.sketch_generator import SketchGenerator
     from construction.sketch_optimizer import SketchOptimizer
-    from constraints.infer import ConstraintInferer
-    from constraints.repair import ConstraintRepairer
-    from manufacturing.analyzer import ManufacturingAnalyzer
     from rules.engine import RuleEngine
     from beam_search.planner import BeamSearchPlanner
     from optimizer.feature_tree_optimizer import FeatureTreeOptimizer
@@ -392,7 +389,7 @@ def test_full_pipeline():
     ggl = GeometryValidator(ggl).validate()
     intents = IntentClassifier().classify(ggl)
     dep = DependencyGraph()
-    dag = dep.build(ggl)
+    dep.build(ggl)
     topo = dep.get_topological_order()
     
     cg = ConstructionGraph()

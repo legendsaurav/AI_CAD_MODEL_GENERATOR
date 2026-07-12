@@ -18,16 +18,16 @@ _REPO_ROOT = os.path.normpath(os.path.join(os.path.dirname(__file__), ".."))
 if _REPO_ROOT not in sys.path:
     sys.path.insert(0, _REPO_ROOT)
 
-from utils.config import ConfigManager
-from utils.logger import ExperimentLogger
-from hooks.feature_extractor import DiTFeatureExtractor
-from graph.ggl import GeometryGraphLanguage, GGLNode, GGLEdge
-from graph.generator import GraphGenerator
-from probing.analyzer import FeatureAnalyzer
-from primitive.generator import PrimitiveProposalGenerator
-from primitive.estimator import ParameterEstimator
-from primitive.optimizer import GeometricOptimizer
-from cad.planner import CADPlanner
+from utils.config import ConfigManager  # noqa: E402
+from utils.logger import ExperimentLogger  # noqa: E402
+from hooks.feature_extractor import DiTFeatureExtractor  # noqa: E402
+from graph.ggl import GeometryGraphLanguage, GGLNode, GGLEdge  # noqa: E402
+from graph.generator import GraphGenerator  # noqa: E402
+from probing.analyzer import FeatureAnalyzer  # noqa: E402
+from primitive.generator import PrimitiveProposalGenerator  # noqa: E402
+from primitive.estimator import ParameterEstimator  # noqa: E402
+from primitive.optimizer import GeometricOptimizer  # noqa: E402
+from cad.planner import CADPlanner  # noqa: E402
 
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -98,13 +98,15 @@ class TestVersion0Hooks(unittest.TestCase):
         self.assertIn(0.5, feats["single_blocks"],  "single_blocks missing t=0.5")
 
         db = feats["double_blocks"][0.5]
-        self.assertIn(1, db); self.assertIn(3, db)
+        self.assertIn(1, db)
+        self.assertIn(3, db)
         self.assertNotIn(0, db)
         self.assertEqual(db[1]["img"].shape, (2, 3072, 1024))
         self.assertEqual(db[1]["txt"].shape, (2, 1370, 1024))
 
         sb = feats["single_blocks"][0.5]
-        self.assertIn(0, sb); self.assertIn(7, sb)
+        self.assertIn(0, sb)
+        self.assertIn(7, sb)
         self.assertEqual(sb[0].shape, (2, 4442, 1024))  # 3072+1370
 
     def test_no_capture_at_wrong_timestep(self):

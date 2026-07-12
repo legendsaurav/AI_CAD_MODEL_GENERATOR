@@ -1,6 +1,6 @@
 from typing import List, Dict, Any
 from pydantic import BaseModel, Field
-from construction.sketch_generator import SketchProfile, SketchEntity
+from construction.sketch_generator import SketchProfile
 
 class GeometricConstraint(BaseModel):
     type: str  # "coincident", "parallel", "perpendicular", "concentric", "tangent", "equal", "symmetry", "midpoint"

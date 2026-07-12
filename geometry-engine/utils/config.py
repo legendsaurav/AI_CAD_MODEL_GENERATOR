@@ -5,6 +5,8 @@ any directory other than the repo root.  We now resolve the config path relative
 to THIS file so it always works regardless of CWD.
 """
 import os
+from typing import Optional
+
 import yaml
 
 # Absolute path to the default config so it works from any working directory
@@ -14,10 +16,10 @@ _DEFAULT_CONFIG = os.path.join(os.path.dirname(__file__), "..", "configs", "defa
 class ConfigManager:
     """Loads and manages the global configuration for the Geometry Engine."""
 
-    _instance = None
+    _instance: Optional["ConfigManager"] = None
     _config: dict = {}
 
-    def __new__(cls, config_path: str = None):
+    def __new__(cls, config_path: Optional[str] = None):
         if cls._instance is None:
             cls._instance = super().__new__(cls)
             path = config_path or _DEFAULT_CONFIG
@@ -42,10 +44,9 @@ class ConfigManager:
         Retrieves a value using dot-notation.
         Example: ConfigManager.get("heads.confidence_threshold")
         """
-        if not cls._instance:
-            cls()
+        instance = cls._instance or cls()
         keys = key_path.split(".")
-        val = cls._instance._config
+        val = instance._config
         for key in keys:
             if isinstance(val, dict) and key in val:
                 val = val[key]
@@ -55,6 +56,5 @@ class ConfigManager:
 
     @classmethod
     def get_all(cls) -> dict:
-        if not cls._instance:
-            cls()
-        return cls._instance._config
+        instance = cls._instance or cls()
+        return instance._config

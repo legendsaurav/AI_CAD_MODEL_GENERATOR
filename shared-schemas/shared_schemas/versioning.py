@@ -7,7 +7,6 @@ Every schema that crosses a repository boundary MUST inherit from
 VersionedSchema to guarantee forward/backward compatibility checks
 and automated migration support.
 """
-import json
 from typing import Any, Callable, Dict, List, Optional, Tuple, Type, TypeVar
 
 from pydantic import BaseModel, Field

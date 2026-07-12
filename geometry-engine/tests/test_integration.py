@@ -10,13 +10,10 @@ Uses synthetic GGL/CAL data and mock executors to test:
   3. ExecutionReport → Refinement Loop → Convergence
   4. Full pipeline with VerificationReport
 """
-import json
 import os
 import sys
-import tempfile
 
 import numpy as np
-import pytest
 
 # Setup sys.path for all modules
 _TEST_ROOT = os.path.normpath(os.path.join(os.path.dirname(__file__), ".."))

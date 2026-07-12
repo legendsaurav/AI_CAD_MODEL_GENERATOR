@@ -81,7 +81,9 @@ def main():
     # Run a short inference pass (e.g., 20 steps is enough to hit the relative timesteps)
     # We set output_type to avoid trimesh/pymeshlab dependencies crashing
     with torch.no_grad():
-        result = pipe(
+        # Inference is run for its capture side-effects (hidden states via hooks);
+        # the returned latents themselves are not consumed here.
+        pipe(
             image=input_image,
             num_inference_steps=30,
             guidance_scale=7.5,

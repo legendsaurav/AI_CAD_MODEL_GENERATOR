@@ -1,6 +1,5 @@
 import importlib
-import os
-from typing import Dict, Any, List
+from typing import Dict, Any
 from heads.base import GeometryHeadBase
 
 class HeadPluginLoader:
@@ -16,8 +15,6 @@ class HeadPluginLoader:
 
     def _load_plugins(self):
         """Discovers and instantiates enabled heads."""
-        head_dir = os.path.dirname(__file__)
-        
         for head_name in self.enabled_heads:
             module_name = f"heads.{head_name}"
             try:

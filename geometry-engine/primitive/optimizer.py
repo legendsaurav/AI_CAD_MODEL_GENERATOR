@@ -215,7 +215,7 @@ class GeometricOptimizer:
                 ax = np.array([params[k] for k in ax_keys])
                 norm = np.linalg.norm(ax)
                 if norm > 0:
-                    error += abs(1.0 - norm)
+                    error += float(abs(1.0 - norm))
 
         return FitResult(
             primitive_type=proposal.type,

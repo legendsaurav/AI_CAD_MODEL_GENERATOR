@@ -22,7 +22,7 @@ import logging
 import time
 from typing import Any, Dict, List, Optional, Tuple
 
-from construction.graph import ConstructionGraph, ConstructionNode
+from construction.graph import ConstructionGraph
 from evaluation.scorer import PlanScorer, ScoringBreakdown
 
 logger = logging.getLogger("cad_planner.beam_search.planner")
@@ -237,7 +237,7 @@ class BeamSearchPlanner:
                 "scoring_breakdown": bc.breakdown.to_dict(),
             })
 
-        rejected_plans = []
+        rejected_plans: List[Dict[str, Any]] = []
         for bc in rejected[:10]:  # Cap at 10 for trace readability
             rejected_plans.append({
                 "candidate_index": len(beam) + len(rejected_plans),
