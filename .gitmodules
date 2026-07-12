@@ -1,0 +1,4 @@
+[submodule "MODEL_GENERATOR_V2"]
+	path = MODEL_GENERATOR_V2
+	url = https://github.com/legendsaurav/MODEL_GENERATOR_V2.git
+	branch = main
