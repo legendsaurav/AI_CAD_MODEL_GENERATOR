@@ -27,7 +27,6 @@ from probing.analyzer import FeatureAnalyzer  # noqa: E402
 from primitive.generator import PrimitiveProposalGenerator  # noqa: E402
 from primitive.estimator import ParameterEstimator  # noqa: E402
 from primitive.optimizer import GeometricOptimizer  # noqa: E402
-from cad.planner import CADPlanner  # noqa: E402
 
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -308,51 +307,6 @@ class TestVersion4GGLSchema(unittest.TestCase):
         ggl = GeometryGraphLanguage()
         self.assertEqual(ggl.metadata.generator, "geometry-engine-v1.0")
         self.assertIsInstance(ggl.metadata.layers_used, list)
-
-
-# ═══════════════════════════════════════════════════════════════════════════
-#  VERSION 5 – CAD Reconstruction
-# ═══════════════════════════════════════════════════════════════════════════
-
-class TestVersion5CADPlanner(unittest.TestCase):
-
-    def _sample_ggl(self) -> GeometryGraphLanguage:
-        ggl = GeometryGraphLanguage()
-        ggl.add_node(GGLNode(node_id="c1", type="Cylinder",
-                             parameters={"radius": 5.0, "height": 20.0}, confidence=0.9))
-        ggl.add_node(GGLNode(node_id="b1", type="Box",
-                             parameters={"width": 10.0, "height": 8.0, "depth": 4.0}, confidence=0.88))
-        ggl.add_node(GGLNode(node_id="s1", type="Sphere",
-                             parameters={"radius": 3.0}, confidence=0.75))
-        return ggl
-
-    def test_freecad_macro_contains_primitives(self):
-        ggl    = self._sample_ggl()
-        macro  = CADPlanner("FreeCAD").generate_macro(ggl)
-        self.assertIn("import FreeCAD", macro)
-        self.assertIn("makeCylinder", macro)
-        self.assertIn("makeBox", macro)
-        self.assertIn("makeSphere", macro)
-
-    def test_solidworks_macro_generated(self):
-        ggl   = self._sample_ggl()
-        macro = CADPlanner("SolidWorks").generate_macro(ggl)
-        self.assertIn("Dim swApp", macro)
-
-    def test_freecad_cylinder_params(self):
-        ggl   = GeometryGraphLanguage()
-        ggl.add_node(GGLNode(node_id="cy", type="Cylinder",
-                             parameters={"radius": 7.5, "height": 30.0}, confidence=0.9))
-        macro = CADPlanner("FreeCAD").generate_macro(ggl)
-        self.assertIn("7.5", macro)
-        self.assertIn("30.0", macro)
-
-    def test_empty_ggl_returns_header_only(self):
-        ggl   = GeometryGraphLanguage()
-        macro = CADPlanner("FreeCAD").generate_macro(ggl)
-        # Should have the FreeCAD header but no primitive calls
-        self.assertIn("import FreeCAD", macro)
-        self.assertNotIn("makeCylinder", macro)
 
 
 # ═══════════════════════════════════════════════════════════════════════════

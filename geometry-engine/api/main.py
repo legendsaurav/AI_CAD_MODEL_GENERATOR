@@ -6,7 +6,10 @@ the API is fully functional end-to-end (with mock features where Hunyuan3D
 is not installed).
 
 New: /health endpoint for Docker/K8s readiness probes.
-New: /export_ggl now also writes the macro file via CADPlanner and returns it.
+
+Note: CAD macro generation is intentionally NOT part of the geometry-engine
+(see cad/__init__.py) — it is handled by cad-planner (GGL → CAL) and
+desktop-agent (CAL → CAD software).
 """
 import json
 import os
@@ -15,7 +18,6 @@ import torch
 from typing import Any, Dict, List
 
 from fastapi import FastAPI, HTTPException
-from fastapi.responses import PlainTextResponse
 from pydantic import BaseModel
 
 # Ensure the repo root is on the path regardless of how uvicorn is launched
@@ -30,7 +32,6 @@ from primitive.generator import PrimitiveProposalGenerator  # noqa: E402
 from primitive.estimator import ParameterEstimator  # noqa: E402
 from primitive.optimizer import GeometricOptimizer  # noqa: E402
 from probing.analyzer import FeatureAnalyzer  # noqa: E402
-from cad.planner import CADPlanner  # noqa: E402
 
 app = FastAPI(
     title="Geometry Engine API",
@@ -58,10 +59,6 @@ class PrimitiveFitRequest(BaseModel):
     ggl_json: str                    # serialised GeometryGraphLanguage JSON
     top_k: int = 3
     optimizer: str = "ransac"
-
-class ExportRequest(BaseModel):
-    ggl_json: str
-    target_system: str = "FreeCAD"  # or "SolidWorks"
 
 # ── Endpoints ──────────────────────────────────────────────────────────────
 
@@ -174,19 +171,6 @@ async def primitive_fit(req: PrimitiveFitRequest):
         "edges": len(ggl.edges),
         "optimized_ggl": json.loads(ggl.to_json()),
     }
-
-
-@app.post("/export_ggl", response_class=PlainTextResponse)
-async def export_ggl(req: ExportRequest):
-    """Translates the GGL into a CAD macro script (FreeCAD Python or SolidWorks VBA)."""
-    try:
-        ggl = GeometryGraphLanguage.from_json(req.ggl_json)
-    except Exception as e:
-        raise HTTPException(status_code=400, detail=f"Invalid GGL JSON: {e}")
-
-    planner = CADPlanner(target_system=req.target_system)
-    macro = planner.generate_macro(ggl)
-    return macro
 
 
 if __name__ == "__main__":

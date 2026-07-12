@@ -21,3 +21,8 @@ dist/
 # Local scratch files
 ._*
 *.bak
+
+# Accidentally-committed Go SDK / toolchain (project is pure Python)
+/go/
+/go.zip
+*.zip
